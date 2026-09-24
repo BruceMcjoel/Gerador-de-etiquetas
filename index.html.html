@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Etiquetas de envio</title>
+<style>
+:root{--bg:#f3f3f0;--panel:#fff;--ink:#1b1d1f;--mute:#6b7076;--line:#d9dad6;--acc:#1f5fbf;--accink:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141516;--panel:#1d1f21;--ink:#ececea;--mute:#9a9fa5;--line:#33363a;--acc:#6aa2ff;--accink:#0d1a2e}}
+:root[data-theme="dark"]{--bg:#141516;--panel:#1d1f21;--ink:#ececea;--mute:#9a9fa5;--line:#33363a;--acc:#6aa2ff;--accink:#0d1a2e}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+.edit{font-weight:650;margin:0 0 14px;padding:8px 10px;border-left:3px solid var(--acc);background:var(--bg)}
+body{margin:0;display:flex;flex-direction:column;height:100vh;height:100dvh;background:var(--bg);color:var(--ink);font:15px/1.4 "Segoe UI",system-ui,Arial,sans-serif}
+header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--line);background:var(--panel)}
+h1{font-size:17px;margin:0;font-weight:650}
+.bar{display:flex;gap:8px}
+button{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:8px 14px;border-radius:6px}
+button.pri{background:var(--acc);color:var(--accink);border-color:var(--acc);font-weight:600}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--acc);outline-offset:1px}
+main{display:grid;grid-template-columns:360px 1fr;flex:1;min-height:0}
+.panel{background:var(--panel);border-right:1px solid var(--line);padding:18px 20px;overflow-y:auto;min-height:0;scrollbar-gutter:stable}
+fieldset{border:0;padding:0;margin:0 0 18px}
+legend{font-weight:650;padding:0;margin-bottom:8px}
+legend small{font-weight:400;color:var(--mute);margin-left:6px}
+label{display:block;font-size:13px;color:var(--mute);margin:8px 0 3px}
+input,select,textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:8px 10px}
+textarea{resize:vertical;min-height:64px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.chk{display:flex;gap:8px;align-items:center;color:var(--ink);font-size:14px;margin:0 0 12px}
+.chk input{width:auto}
+.tabs{display:flex;gap:6px;margin-bottom:14px}
+.tabs button{flex:1}
+.tabs button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.stage{padding:20px;overflow:auto;min-height:0;display:flex;justify-content:center;align-items:flex-start}
+.scaler{position:relative;flex:none}
+.pages{width:210mm;display:flex;flex-direction:column;gap:8mm;transform-origin:top left}
+.sheet{width:210mm;height:297mm;flex:none;background:#fff;color:#000;box-shadow:0 2px 14px rgba(0,0,0,.25);font-family:Arial,Helvetica,sans-serif}
+.envios{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.envios button{padding:6px 10px;font-size:13px}
+.envios button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.bar2{display:flex;gap:6px;margin-bottom:12px}
+.bar2 button{flex:1;padding:6px 8px;font-size:13px}
+button:disabled{opacity:.5;cursor:default}
+.note{font-size:13px;color:var(--mute);margin:0 0 14px}
+.lab{height:148.5mm;padding:7mm 10mm 6mm;display:flex;flex-direction:column;gap:4mm;overflow:hidden}
+.lab+.lab{border-top:.3mm dashed #888}
+.city{font-weight:800;line-height:1;text-transform:uppercase;letter-spacing:-.5pt;border-bottom:1mm solid #000;padding-bottom:2.5mm;overflow-wrap:anywhere}
+.prim{display:grid;grid-template-columns:1.9fr 1fr;gap:5mm}
+.box{border:1.4mm solid #000;padding:2mm 4mm;display:flex;flex-direction:column;justify-content:flex-start;overflow:hidden}
+.box small{display:block;font-size:10pt;color:#333}
+.box b{display:flex;flex:1;align-items:center;justify-content:center;line-height:1;font-weight:900;white-space:nowrap}
+.box.sap b{letter-spacing:-1pt}
+.box.sap,.box.vol{padding-top:0;text-align:center}
+.tag{display:block;background:#000;color:#fff;font-size:22pt;font-weight:900;letter-spacing:1.5pt;text-transform:uppercase;padding:1.2mm 0;margin:0 -4mm 2mm}
+.sec{display:grid;grid-template-columns:1.6fr .9fr 1.1fr;gap:5mm}
+.sec small{display:block;font-size:8.5pt;color:#444}
+.sec b{font-size:14pt;line-height:1.2;overflow-wrap:anywhere}
+.sec .ac b{font-size:17pt;line-height:1.15}
+.add{display:grid;grid-template-columns:1fr 32mm 1fr;gap:6mm;align-items:center;flex:1;min-height:0;border-top:.3mm solid #000;padding-top:3mm}
+.obs{font-size:11pt;line-height:1.3;overflow:hidden;max-height:100%;align-self:start}
+.obs small{display:block;font-size:8.5pt;color:#444}
+.qr{grid-column:2;width:32mm;height:32mm;display:flex;align-items:center;justify-content:center;font-size:8pt;color:#666;text-align:center;border:.3mm dashed #999}
+.qr img,.qr canvas{width:100%!important;height:100%!important}
+.qr canvas{display:none}
+.hint{font-size:12px;color:var(--mute);margin:6px 0 0}
+@media(max-width:860px){body{display:block;height:auto}main{grid-template-columns:1fr}.panel{max-height:70vh}.panel{border-right:0;border-bottom:1px solid var(--line)}}
+@media print{
+@page{size:A4;margin:0}
+header,.panel{display:none!important}
+html,body{background:#fff}
+html,body{height:auto!important;display:block!important}
+main{display:block;min-height:0}
+.stage{padding:0;display:block;overflow:visible}
+.scaler{width:auto!important;height:auto!important}
+.pages{transform:none!important;gap:0}
+.sheet{box-shadow:none;height:296.5mm;break-after:page;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.sheet:last-child{break-after:auto}
+}
+</style>
+</head>
+<body>
+<header>
+<h1>Etiquetas de envio</h1>
+<div class="bar">
+<button id="tema" type="button" aria-label="Alternar tema">Tema</button>
+<button id="baixar" class="pri" type="button">Baixar PDF</button>
+<button id="imp" type="button">Imprimir A4</button>
+</div>
+</header>
+<main>
+<section class="panel">
+<div class="envios" id="envios"></div>
+<div class="bar2"><button type="button" id="novoEnvio">+ Novo envio</button><button type="button" id="dupEnvio">Duplicar</button><button type="button" id="delEnvio">Remover</button></div>
+<p class="edit" id="edit"></p>
+<p class="note" id="auto"></p>
+<fieldset>
+<legend>Destino <small>principal</small></legend>
+<div class="row">
+<div><label for="tipo">Documento SAP</label>
+<select id="tipo"><option>Reserva</option><option>Pedido</option></select></div>
+<div><label for="sap">Número</label><input id="sap" inputmode="numeric" placeholder="Ex.: 1234567890"></div>
+</div>
+<div class="row">
+<div><label for="volTipo">Tipo de volume</label><select id="volTipo"><option>Caixa</option><option>Palete</option></select></div>
+<div><label for="volT">Total de volumes</label><input id="volT" type="number" min="1" max="60" placeholder="1"></div>
+</div>
+<label for="cidadeSel">Cidade</label><select id="cidadeSel"><option value="">Selecione uma cidade</option><option>Araxá</option><option>Uberaba</option><option>Patrocínio</option><option>João Pinheiro</option><option>São Gotardo</option><option>Patos de Minas</option><option>Paracatu</option><option>Frutal</option><option>Ituiutaba</option><option>Iturama</option><option>Araguari</option><option>Monte Carmelo</option><option>ALB</option><option value="__outro">Digitar manualmente</option></select>
+<input id="cidade" hidden placeholder="Digite a cidade" style="margin-top:8px">
+<label class="chk" style="margin-top:12px"><input type="checkbox" id="copias"> Imprimir 2 cópias de cada etiqueta</label>
+</fieldset>
+
+<fieldset>
+<legend>Envio <small>secundário</small></legend>
+<label for="reqSel">A/C</label><select id="reqSel"><option value="">Selecione um nome</option><option>HENRE MARLON DA SILVA TAVARES</option><option>CARLOS HUMBERTO SILVA JUNIOR</option><option>DIEGO FELIPE GOMES BORGES</option><option>JOAQUIM CAMILO NETO</option><option>GUILHERME TEIXEIRA DE AQUINO</option><option>RENATO ROGERIO ROSA</option><option>MARCIO RIBEIRO DE ALMEIDA</option><option>MARLON COELHO DE MAGALHAES</option><option>RODRIGO CARNEVALI VIEIRA</option><option>KELVIN SILVA PACHECO</option><option>CARLOS EDUARDO CALIL</option><option>DECIO PARANAIBA DE ANDRADE JUN</option><option>WEBER MARTINS DE ALMEIDA</option><option>LEANDRO DE OLIVEIRA PINTO</option><option>FERNANDO JOSE BRAZ MOREIRA</option><option>GESON SANTOS</option><option value="__outro">Digitar manualmente</option></select>
+<input id="req" hidden placeholder="Digite o nome completo" style="margin-top:8px;text-transform:uppercase">
+<div class="row">
+<div><label for="data">Data de envio</label><input id="data" type="date"></div>
+<div><label for="setor">Setor de origem</label>
+<select id="setor"><option>Almoxarifado Matriz</option><option>Merchandising</option><option>Outro</option></select></div>
+</div>
+<div id="outroBox" hidden><label for="outro">Qual setor?</label><input id="outro" placeholder="Nome do setor"></div>
+</fieldset>
+
+<fieldset>
+<legend>Adicionais</legend>
+<label for="obs">Observações</label><textarea id="obs" placeholder="Frágil, entregar na portaria..."></textarea>
+<label for="link">Link do fluxo (vira QR code)</label><input id="link" type="url" placeholder="https://...">
+</fieldset>
+<p class="hint">Dica: na janela de impressão, desative cabeçalhos e rodapés e use escala 100%. Se o botão Imprimir não abrir nada, use "Baixar PDF" e imprima o arquivo pelo seu leitor de PDF.</p>
+</section>
+
+<section class="stage" id="stage">
+<div class="scaler" id="scaler"><div class="pages" id="sheet"></div></div>
+</section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+(function(){
+var ids=["tipo","sap","volTipo","volT","cidadeSel","cidade","reqSel","req","data","setor","outro","obs","link"];
+var hoje=new Date().toISOString().slice(0,10);
+function novo(){return{tipo:"Reserva",sap:"",volTipo:"Caixa",volT:"1",copias:false,cidade:"",cidadeSel:"",reqSel:"",req:"",data:hoje,setor:"Almoxarifado Matriz",outro:"",obs:"",link:""}}
+var E=[novo()],ativo=0;
+var $=function(i){return document.getElementById(i)};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function dt(s){if(!s)return"—";var p=s.split("-");return p[2]+"/"+p[1]+"/"+p[0]}
+function v(s){return s?esc(s):"—"}
+function nomeAC(d){return (d.reqSel==="__outro"?d.req:d.reqSel).trim().toLocaleUpperCase("pt-BR")}
+function etiqueta(d,vol,tot){
+var setor=d.setor==="Outro"?(d.outro||"Outro"):d.setor;
+var cid=d.cidadeSel==="__outro"?d.cidade:d.cidadeSel,cl=cid.length,cpt=cl<=9?68:cl<=12?62:cl<=14?54:46;
+var sl=(d.sap||"").length,spt=sl<=6?80:sl<=8?68:sl<=10?52:44;
+var vt=vol+"/"+tot,vpt=vt.length<=3?72:vt.length<=4?62:54;
+return '<div class="lab"><div class="city" style="font-size:'+cpt+'pt">'+v(cid)+'</div>'+
+'<div class="prim"><div class="box sap"><span class="tag">'+esc(d.tipo)+' SAP</span><b style="font-size:'+spt+'pt">'+v(d.sap)+'</b></div>'+
+'<div class="box vol"><span class="tag">'+esc(d.volTipo)+'</span><b style="font-size:'+vpt+'pt">'+esc(vt)+'</b></div></div>'+
+'<div class="sec"><div class="ac"><small>A/C</small><b>'+v(nomeAC(d))+'</b></div>'+
+'<div><small>Data de envio</small><b>'+dt(d.data)+'</b></div>'+
+'<div><small>Setor de origem</small><b>'+esc(setor)+'</b></div></div>'+
+'<div class="add"><div class="obs"><small>Observações</small>'+(d.obs?esc(d.obs).replace(/\n/g,"<br>"):"—")+'</div>'+
+'<div class="qr" data-l="'+esc(d.link)+'">'+(d.link?"":"QR do fluxo")+'</div></div></div>';
+}
+function cidadeDe(e){return e.cidadeSel==="__outro"?e.cidade:e.cidadeSel}
+function etiquetas(){var out=[];E.forEach(function(e){var n=Math.min(Math.max(parseInt(e.volT,10)||1,1),60),c=e.copias?2:1;for(var i=1;i<=n;i++)for(var k=0;k<c;k++)out.push(etiqueta(e,i,n))});return out}
+function desenhar(){
+var labs=etiquetas(),h="",n=Math.ceil(labs.length/2);
+for(var i=0;i<labs.length;i+=2){h+='<div class="sheet">'+labs[i]+(labs[i+1]||'<div class="lab"></div>')+'</div>'}
+$("sheet").innerHTML=h;
+$("auto").textContent=labs.length+(labs.length>1?" etiquetas":" etiqueta")+" em "+n+(n>1?" folhas A4":" folha A4")+", duas por folha.";
+[].forEach.call(document.querySelectorAll(".qr[data-l]"),function(el){
+var t=el.getAttribute("data-l");
+if(t&&window.QRCode){try{new QRCode(el,{text:t,width:256,height:256,correctLevel:QRCode.CorrectLevel.M})}catch(e){el.textContent="Link longo demais"}}
+});
+ajustar();
+}
+function chips(){
+$("envios").innerHTML=E.map(function(e,i){return '<button type="button" data-i="'+i+'" aria-pressed="'+(i===ativo)+'">'+(i+1)+' · '+esc(cidadeDe(e)||"novo")+'</button>'}).join("");
+$("delEnvio").disabled=E.length<2;$("novoEnvio").disabled=E.length>=20;$("dupEnvio").disabled=E.length>=20;
+$("edit").textContent="Editando: envio "+(ativo+1)+" de "+E.length;
+}
+function preencher(){
+var e=E[ativo];
+ids.forEach(function(i){$(i).value=e[i]});
+$("copias").checked=!!e.copias;
+$("outroBox").hidden=e.setor!=="Outro";$("req").hidden=e.reqSel!=="__outro";$("cidade").hidden=e.cidadeSel!=="__outro";
+chips();
+}
+ids.forEach(function(i){
+$(i).addEventListener("input",function(){
+E[ativo][i]=$(i).value;
+if(i==="cidadeSel")$("cidade").hidden=$(i).value!=="__outro";
+if(i==="reqSel")$("req").hidden=$(i).value!=="__outro";
+if(i==="setor")$("outroBox").hidden=$(i).value!=="Outro";
+if(i==="cidadeSel"||i==="cidade")chips();
+desenhar();
+});
+});
+$("copias").addEventListener("change",function(){E[ativo].copias=$("copias").checked;desenhar()});
+$("envios").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;ativo=+b.dataset.i;preencher()});
+$("novoEnvio").addEventListener("click",function(){E.push(novo());ativo=E.length-1;preencher();desenhar()});
+$("dupEnvio").addEventListener("click",function(){E.splice(ativo+1,0,Object.assign({},E[ativo]));ativo++;preencher();desenhar()});
+$("delEnvio").addEventListener("click",function(){if(E.length<2)return;E.splice(ativo,1);ativo=Math.min(ativo,E.length-1);preencher();desenhar()});
+$("imp").addEventListener("click",function(){try{window.print()}catch(e){}});
+var dl=null;
+if(window.claude&&claude.use){claude.use("downloads").then(function(d){if(d){dl=d}}).catch(function(){})}
+$("baixar").addEventListener("click",async function(){
+var btn=$("baixar"),txt=btn.textContent,host=document.createElement("div");
+if(!window.html2canvas||!window.jspdf){btn.textContent="Biblioteca não carregou";setTimeout(function(){btn.textContent=txt},2500);return}
+btn.disabled=true;btn.textContent="Gerando PDF...";
+host.style.cssText="position:fixed;left:-99999px;top:0;width:210mm";
+try{
+document.body.appendChild(host);
+var doc=new window.jspdf.jsPDF({unit:"mm",format:"a4",orientation:"portrait"});
+var fl=$("sheet").querySelectorAll(".sheet");
+for(var i=0;i<fl.length;i++){
+var c=fl[i].cloneNode(true);host.innerHTML="";host.appendChild(c);
+var cv=await html2canvas(c,{scale:2,backgroundColor:"#ffffff"});
+if(i)doc.addPage();
+doc.addImage(cv.toDataURL("image/jpeg",0.92),"JPEG",0,0,210,297);
+}
+if(dl){await dl.save({filename:"etiquetas-a4.pdf",data:doc.output("blob")})}else{doc.save("etiquetas-a4.pdf")}
+}catch(e){btn.textContent="Não foi possível gerar";setTimeout(function(){btn.textContent=txt},2500)}
+finally{host.remove();btn.disabled=false;if(btn.textContent==="Gerando PDF...")btn.textContent=txt}
+});
+function ajustar(){
+var w=$("stage").clientWidth-40,px=210*96/25.4,s=Math.min(1,w/px);
+$("sheet").style.transform="scale("+s+")";
+var n=Math.max(1,$("sheet").children.length);$("scaler").style.width=px*s+"px";$("scaler").style.height=((n*297+(n-1)*8)*96/25.4)*s+"px";
+}
+window.addEventListener("resize",ajustar);
+var root=document.documentElement;
+try{var t=localStorage.getItem("tema");if(t)root.setAttribute("data-theme",t)}catch(e){}
+$("tema").addEventListener("click",function(){
+var atual=root.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
+var n=atual==="dark"?"light":"dark";root.setAttribute("data-theme",n);
+try{localStorage.setItem("tema",n)}catch(e){}
+});
+preencher();desenhar();
+})();
+</script>
+</body>
+</html>
